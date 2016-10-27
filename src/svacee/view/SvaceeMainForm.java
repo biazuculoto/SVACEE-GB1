@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svacee.gb1.interfac;
+package svacee.view;
 
 /**
  *
