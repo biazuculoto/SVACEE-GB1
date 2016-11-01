@@ -5,6 +5,8 @@
  */
 package svacee.view;
 
+import java.awt.Color;
+
 /**
  *
  * @author aluno
@@ -16,6 +18,9 @@ public class SvaceeMainForm extends javax.swing.JFrame {
      */
     public SvaceeMainForm() {
         initComponents();
+        getContentPane().setBackground(Color.white);
+        jPanel1.updateUI();
+        
     }
 
     /**
@@ -27,20 +32,91 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        Menu = new javax.swing.JMenuBar();
+        Menu1 = new javax.swing.JMenu();
+        SubMenu11 = new javax.swing.JMenuItem();
+        SubMenu12 = new javax.swing.JMenuItem();
+        Menu2 = new javax.swing.JMenu();
+        SubMenu21 = new javax.swing.JMenuItem();
+        SubMenu22 = new javax.swing.JMenuItem();
+        Menu3 = new javax.swing.JMenu();
+        SubMenu31 = new javax.swing.JMenuItem();
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu SVACEE");
+        setBackground(java.awt.Color.white);
+
+        jLabel2.setBackground(java.awt.Color.white);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/fundo.png"))); // NOI18N
+
+        Menu.setBackground(java.awt.Color.gray);
+        Menu.setAlignmentX(0.55F);
+        Menu.setAlignmentY(0.51F);
+
+        Menu1.setBackground(java.awt.Color.black);
+        Menu1.setText("Arquivo");
+        Menu1.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+
+        SubMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/add_page (2).png"))); // NOI18N
+        SubMenu11.setText("Obter Dados CSV");
+        Menu1.add(SubMenu11);
+
+        SubMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/delete (2).png"))); // NOI18N
+        SubMenu12.setText("Sair");
+        Menu1.add(SubMenu12);
+
+        Menu.add(Menu1);
+
+        Menu2.setBackground(java.awt.Color.black);
+        Menu2.setText("Visualizar");
+        Menu2.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+
+        SubMenu21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/tabela.png"))); // NOI18N
+        SubMenu21.setText("Tabela de Dados");
+        Menu2.add(SubMenu21);
+
+        SubMenu22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/chart (2).png"))); // NOI18N
+        SubMenu22.setText("Gráfico de Consumo");
+        Menu2.add(SubMenu22);
+
+        Menu.add(Menu2);
+
+        Menu3.setBackground(java.awt.Color.black);
+        Menu3.setText("Ajuda");
+        Menu3.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+
+        SubMenu31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/info (2).png"))); // NOI18N
+        SubMenu31.setText("Sobre");
+        Menu3.add(SubMenu31);
+
+        Menu.add(Menu3);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(45, 45, 45))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -79,5 +155,16 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar Menu;
+    private javax.swing.JMenu Menu1;
+    private javax.swing.JMenu Menu2;
+    private javax.swing.JMenu Menu3;
+    private javax.swing.JMenuItem SubMenu11;
+    private javax.swing.JMenuItem SubMenu12;
+    private javax.swing.JMenuItem SubMenu21;
+    private javax.swing.JMenuItem SubMenu22;
+    private javax.swing.JMenuItem SubMenu31;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
