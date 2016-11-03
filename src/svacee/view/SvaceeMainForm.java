@@ -9,7 +9,7 @@ import java.awt.Color;
 
 /**
  *
- * @author aluno
+ * @author Bianca, João Daniel e Vinícius
  */
 public class SvaceeMainForm extends javax.swing.JFrame {
 
@@ -20,7 +20,13 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(Color.white);
         jPanel1.updateUI();
-        
+
+        bDado.setToolTipText("Obter dados a partir de arquivos CSV");
+        bGrafico.setToolTipText("Obter dados a partir do gráfico");
+        bTabela.setToolTipText("Obter dados a partir da tabela");
+        bSobre.setToolTipText("Obter informações sobre o software");
+        bSair.setToolTipText("Sair");
+
     }
 
     /**
@@ -34,15 +40,25 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        Menu = new javax.swing.JMenuBar();
-        Menu1 = new javax.swing.JMenu();
-        SubMenu11 = new javax.swing.JMenuItem();
-        SubMenu12 = new javax.swing.JMenuItem();
-        Menu2 = new javax.swing.JMenu();
-        SubMenu21 = new javax.swing.JMenuItem();
-        SubMenu22 = new javax.swing.JMenuItem();
-        Menu3 = new javax.swing.JMenu();
-        SubMenu31 = new javax.swing.JMenuItem();
+        barraFerramenta = new javax.swing.JToolBar();
+        bDado = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        bTabela = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        bGrafico = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        bSobre = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        bSair = new javax.swing.JButton();
+        menu = new javax.swing.JMenuBar();
+        mArquivo = new javax.swing.JMenu();
+        smDado = new javax.swing.JMenuItem();
+        smSair = new javax.swing.JMenuItem();
+        mVisualizar = new javax.swing.JMenu();
+        smTabela = new javax.swing.JMenuItem();
+        smGrafico = new javax.swing.JMenuItem();
+        mAjuda = new javax.swing.JMenu();
+        smSobre = new javax.swing.JMenuItem();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -52,51 +68,106 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
         jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/fundo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/loss(1).png"))); // NOI18N
 
-        Menu.setBackground(java.awt.Color.gray);
-        Menu.setAlignmentX(0.55F);
-        Menu.setAlignmentY(0.51F);
+        barraFerramenta.setBackground(java.awt.Color.lightGray);
+        barraFerramenta.setRollover(true);
 
-        Menu1.setBackground(java.awt.Color.black);
-        Menu1.setText("Arquivo");
-        Menu1.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+        bDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/add_page (2).png"))); // NOI18N
+        bDado.setFocusable(false);
+        bDado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bDado.setMaximumSize(new java.awt.Dimension(60, 45));
+        bDado.setMinimumSize(new java.awt.Dimension(60, 45));
+        bDado.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        barraFerramenta.add(bDado);
+        barraFerramenta.add(jSeparator1);
 
-        SubMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/add_page (2).png"))); // NOI18N
-        SubMenu11.setText("Obter Dados CSV");
-        Menu1.add(SubMenu11);
+        bTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/tabela.png"))); // NOI18N
+        bTabela.setFocusable(false);
+        bTabela.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bTabela.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        barraFerramenta.add(bTabela);
+        barraFerramenta.add(jSeparator2);
 
-        SubMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/delete (2).png"))); // NOI18N
-        SubMenu12.setText("Sair");
-        Menu1.add(SubMenu12);
+        bGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/chart (2).png"))); // NOI18N
+        bGrafico.setFocusable(false);
+        bGrafico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bGrafico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        barraFerramenta.add(bGrafico);
+        barraFerramenta.add(jSeparator3);
 
-        Menu.add(Menu1);
+        bSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/info (2).png"))); // NOI18N
+        bSobre.setFocusable(false);
+        bSobre.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bSobre.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        barraFerramenta.add(bSobre);
+        barraFerramenta.add(jSeparator4);
 
-        Menu2.setBackground(java.awt.Color.black);
-        Menu2.setText("Visualizar");
-        Menu2.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+        bSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/delete (2).png"))); // NOI18N
+        bSair.setFocusable(false);
+        bSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSairActionPerformed(evt);
+            }
+        });
+        barraFerramenta.add(bSair);
 
-        SubMenu21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/tabela.png"))); // NOI18N
-        SubMenu21.setText("Tabela de Dados");
-        Menu2.add(SubMenu21);
+        menu.setBackground(new java.awt.Color(109, 212, 247));
+        menu.setForeground(new java.awt.Color(109, 212, 247));
+        menu.setAlignmentX(0.55F);
+        menu.setAlignmentY(0.51F);
 
-        SubMenu22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/chart (2).png"))); // NOI18N
-        SubMenu22.setText("Gráfico de Consumo");
-        Menu2.add(SubMenu22);
+        mArquivo.setBackground(java.awt.Color.black);
+        mArquivo.setText("Arquivo");
+        mArquivo.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
 
-        Menu.add(Menu2);
+        smDado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        smDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/add_page (2).png"))); // NOI18N
+        smDado.setText("Obter Dados CSV");
+        mArquivo.add(smDado);
 
-        Menu3.setBackground(java.awt.Color.black);
-        Menu3.setText("Ajuda");
-        Menu3.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+        smSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        smSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/delete (2).png"))); // NOI18N
+        smSair.setText("Sair");
+        smSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smSairActionPerformed(evt);
+            }
+        });
+        mArquivo.add(smSair);
 
-        SubMenu31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/info (2).png"))); // NOI18N
-        SubMenu31.setText("Sobre");
-        Menu3.add(SubMenu31);
+        menu.add(mArquivo);
 
-        Menu.add(Menu3);
+        mVisualizar.setBackground(java.awt.Color.black);
+        mVisualizar.setText("Visualizar");
+        mVisualizar.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
 
-        setJMenuBar(Menu);
+        smTabela.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        smTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/tabela.png"))); // NOI18N
+        smTabela.setText("Tabela de Dados");
+        mVisualizar.add(smTabela);
+
+        smGrafico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        smGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/chart (2).png"))); // NOI18N
+        smGrafico.setText("Gráfico de Consumo");
+        mVisualizar.add(smGrafico);
+
+        menu.add(mVisualizar);
+
+        mAjuda.setBackground(java.awt.Color.black);
+        mAjuda.setText("Ajuda");
+        mAjuda.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+
+        smSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        smSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/info (2).png"))); // NOI18N
+        smSobre.setText("Sobre");
+        mAjuda.add(smSobre);
+
+        menu.add(mAjuda);
+
+        setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,11 +177,13 @@ public class SvaceeMainForm extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(82, 82, 82))
+            .addComponent(barraFerramenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addComponent(barraFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(45, 45, 45))
         );
@@ -118,6 +191,17 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_bSairActionPerformed
+
+    private void smSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+
+    }//GEN-LAST:event_smSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,16 +239,26 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar Menu;
-    private javax.swing.JMenu Menu1;
-    private javax.swing.JMenu Menu2;
-    private javax.swing.JMenu Menu3;
-    private javax.swing.JMenuItem SubMenu11;
-    private javax.swing.JMenuItem SubMenu12;
-    private javax.swing.JMenuItem SubMenu21;
-    private javax.swing.JMenuItem SubMenu22;
-    private javax.swing.JMenuItem SubMenu31;
+    private javax.swing.JButton bDado;
+    private javax.swing.JButton bGrafico;
+    private javax.swing.JButton bSair;
+    private javax.swing.JButton bSobre;
+    private javax.swing.JButton bTabela;
+    private javax.swing.JToolBar barraFerramenta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JMenu mAjuda;
+    private javax.swing.JMenu mArquivo;
+    private javax.swing.JMenu mVisualizar;
+    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenuItem smDado;
+    private javax.swing.JMenuItem smGrafico;
+    private javax.swing.JMenuItem smSair;
+    private javax.swing.JMenuItem smSobre;
+    private javax.swing.JMenuItem smTabela;
     // End of variables declaration//GEN-END:variables
 }
