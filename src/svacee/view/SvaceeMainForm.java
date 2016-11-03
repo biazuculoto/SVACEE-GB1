@@ -6,6 +6,7 @@
 package svacee.view;
 
 import java.awt.Color;
+import svacee.controller.LerCSV;
 
 /**
  *
@@ -13,19 +14,22 @@ import java.awt.Color;
  */
 public class SvaceeMainForm extends javax.swing.JFrame {
 
+    LerCSV lcsv;
+
     /**
      * Creates new form SvaceeMainForm
      */
     public SvaceeMainForm() {
         initComponents();
         getContentPane().setBackground(Color.white);
-        jPanel1.updateUI();
 
         bDado.setToolTipText("Obter dados a partir de arquivos CSV");
         bGrafico.setToolTipText("Obter dados a partir do gráfico");
         bTabela.setToolTipText("Obter dados a partir da tabela");
         bSobre.setToolTipText("Obter informações sobre o software");
         bSair.setToolTipText("Sair");
+
+        lcsv = new LerCSV();
 
     }
 
@@ -79,6 +83,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bDado.setMaximumSize(new java.awt.Dimension(60, 45));
         bDado.setMinimumSize(new java.awt.Dimension(60, 45));
         bDado.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bDado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDadoActionPerformed(evt);
+            }
+        });
         barraFerramenta.add(bDado);
         barraFerramenta.add(jSeparator1);
 
@@ -103,7 +112,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         barraFerramenta.add(bSobre);
         barraFerramenta.add(jSeparator4);
 
-        bSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/delete (2).png"))); // NOI18N
+        bSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/sair.png"))); // NOI18N
         bSair.setFocusable(false);
         bSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -126,10 +135,15 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         smDado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         smDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/add_page (2).png"))); // NOI18N
         smDado.setText("Obter Dados CSV");
+        smDado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smDadoActionPerformed(evt);
+            }
+        });
         mArquivo.add(smDado);
 
         smSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        smSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/delete (2).png"))); // NOI18N
+        smSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/sair.png"))); // NOI18N
         smSair.setText("Sair");
         smSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +216,16 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_smSairActionPerformed
+
+    private void bDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDadoActionPerformed
+        // TODO add your handling code here:
+        lcsv.run();
+    }//GEN-LAST:event_bDadoActionPerformed
+
+    private void smDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smDadoActionPerformed
+        // TODO add your handling code here:
+        lcsv.run();
+    }//GEN-LAST:event_smDadoActionPerformed
 
     /**
      * @param args the command line arguments
