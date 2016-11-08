@@ -1,4 +1,3 @@
-
 package svacee.controller;
 
 import java.io.BufferedReader;
@@ -10,11 +9,11 @@ import javax.swing.JFileChooser;
 
 /**
  *
- * @author Porca1 porca 2 Porca3
- * 
+ * @author Bianca/ João D./ Vinicius
+ *
  */
 public class LerCSV {
-    
+
     public void run() {
 
         BufferedReader br = null;
@@ -36,7 +35,7 @@ public class LerCSV {
                             + " Valor:" + dados[1]);
 
                 }
-            } 
+            }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -53,5 +52,3 @@ public class LerCSV {
         }
     }
 }
-
-
