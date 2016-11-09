@@ -6,7 +6,13 @@
 package svacee.view;
 
 import java.awt.Color;
-import svacee.controller.LerCSV;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import svacee.controller.DadosConsumoCtrl;
 
 /**
  *
@@ -14,7 +20,7 @@ import svacee.controller.LerCSV;
  */
 public class SvaceeMainForm extends javax.swing.JFrame {
 
-    LerCSV lcsv;
+    DadosConsumoCtrl lcsv;
 
     /**
      * Creates new form SvaceeMainForm
@@ -29,9 +35,10 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bSobre.setToolTipText("Obter informações sobre o software");
         bSair.setToolTipText("Sair");
 
-        lcsv = new LerCSV();
+        lcsv = new DadosConsumoCtrl();
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,12 +79,12 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
         jLabel2.setBackground(java.awt.Color.white);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/loss(1).png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/loss(1).png"))); // NOI18N
 
         barraFerramenta.setBackground(java.awt.Color.lightGray);
         barraFerramenta.setRollover(true);
 
-        bDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/add_page (2).png"))); // NOI18N
+        bDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/add_page (2).png"))); // NOI18N
         bDado.setFocusable(false);
         bDado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bDado.setMaximumSize(new java.awt.Dimension(60, 45));
@@ -91,28 +98,28 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         barraFerramenta.add(bDado);
         barraFerramenta.add(jSeparator1);
 
-        bTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/tabela.png"))); // NOI18N
+        bTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/tabela.png"))); // NOI18N
         bTabela.setFocusable(false);
         bTabela.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bTabela.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         barraFerramenta.add(bTabela);
         barraFerramenta.add(jSeparator2);
 
-        bGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/chart (2).png"))); // NOI18N
+        bGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/chart (2).png"))); // NOI18N
         bGrafico.setFocusable(false);
         bGrafico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bGrafico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         barraFerramenta.add(bGrafico);
         barraFerramenta.add(jSeparator3);
 
-        bSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/info (2).png"))); // NOI18N
+        bSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/info (2).png"))); // NOI18N
         bSobre.setFocusable(false);
         bSobre.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bSobre.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         barraFerramenta.add(bSobre);
         barraFerramenta.add(jSeparator4);
 
-        bSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/sair.png"))); // NOI18N
+        bSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/sair.png"))); // NOI18N
         bSair.setFocusable(false);
         bSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -124,6 +131,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         barraFerramenta.add(bSair);
 
         menu.setBackground(new java.awt.Color(109, 212, 247));
+        menu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         menu.setForeground(new java.awt.Color(109, 212, 247));
         menu.setAlignmentX(0.55F);
         menu.setAlignmentY(0.51F);
@@ -133,7 +141,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         mArquivo.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
 
         smDado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        smDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/add_page (2).png"))); // NOI18N
+        smDado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/add_page (2).png"))); // NOI18N
         smDado.setText("Obter Dados CSV");
         smDado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +151,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         mArquivo.add(smDado);
 
         smSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        smSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/sair.png"))); // NOI18N
+        smSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/sair.png"))); // NOI18N
         smSair.setText("Sair");
         smSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,12 +167,12 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         mVisualizar.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
 
         smTabela.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        smTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/tabela.png"))); // NOI18N
+        smTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/tabela.png"))); // NOI18N
         smTabela.setText("Tabela de Dados");
         mVisualizar.add(smTabela);
 
         smGrafico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        smGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/chart (2).png"))); // NOI18N
+        smGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/chart (2).png"))); // NOI18N
         smGrafico.setText("Gráfico de Consumo");
         mVisualizar.add(smGrafico);
 
@@ -175,7 +183,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         mAjuda.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
 
         smSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        smSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/img/info (2).png"))); // NOI18N
+        smSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/info (2).png"))); // NOI18N
         smSobre.setText("Sobre");
         mAjuda.add(smSobre);
 
@@ -219,12 +227,12 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
     private void bDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDadoActionPerformed
         // TODO add your handling code here:
-        lcsv.run();
+        //run();
     }//GEN-LAST:event_bDadoActionPerformed
 
     private void smDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smDadoActionPerformed
         // TODO add your handling code here:
-        lcsv.run();
+        //run();
     }//GEN-LAST:event_smDadoActionPerformed
 
     /**

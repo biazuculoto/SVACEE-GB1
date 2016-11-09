@@ -5,7 +5,14 @@
  */
 package svacee.teste;
 
-import svacee.controller.LerCSV;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+import svacee.controller.DadosConsumoCtrl;
 
 /**
  *
@@ -16,9 +23,35 @@ public class Teste1 extends javax.swing.JFrame {
     /**
      * Creates new form Teste1
      */
-    LerCSV lcsv = new LerCSV();
+    DadosConsumoCtrl lcsv = new DadosConsumoCtrl();
+
+    String v1;
+    String v2;
+
     public Teste1() {
         initComponents();
+    }
+
+    public void run() {
+
+        try {
+
+            JFileChooser jfc = new JFileChooser();
+            int retorno = jfc.showOpenDialog(null);
+            if (retorno == JFileChooser.APPROVE_OPTION) {
+                File arq = jfc.getSelectedFile();
+
+                lcsv.obterCsv(arq);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
     }
 
     /**
@@ -31,6 +64,9 @@ public class Teste1 extends javax.swing.JFrame {
     private void initComponents() {
 
         csvbotão = new javax.swing.JButton();
+        bTabela = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,21 +77,64 @@ public class Teste1 extends javax.swing.JFrame {
             }
         });
 
+        bTabela.setText("tabela");
+        bTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bTabelaActionPerformed(evt);
+            }
+        });
+
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nome", "Numero"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setResizable(false);
+            tabela.getColumnModel().getColumn(1).setResizable(false);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addComponent(csvbotão)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(bTabela)
+                        .addGap(31, 31, 31)
+                        .addComponent(csvbotão)))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(csvbotão)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bTabela)
+                    .addComponent(csvbotão))
+                .addGap(52, 52, 52)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         pack();
@@ -63,8 +142,16 @@ public class Teste1 extends javax.swing.JFrame {
 
     private void csvbotãoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvbotãoActionPerformed
         // TODO add your handling code here:
-        lcsv.run();
+        run();
     }//GEN-LAST:event_csvbotãoActionPerformed
+
+    private void bTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTabelaActionPerformed
+        // TODO add your handling code here
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.getDataVector().removeAllElements();
+
+        model.addRow(new Object[]{lcsv.getDados()});
+    }//GEN-LAST:event_bTabelaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,6 +189,9 @@ public class Teste1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bTabela;
     private javax.swing.JButton csvbotão;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

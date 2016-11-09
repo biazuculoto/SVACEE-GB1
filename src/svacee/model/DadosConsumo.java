@@ -7,13 +7,13 @@ import javax.xml.crypto.Data;
  *
  * @author Bianca/ João D./ Vinicius
  */
-public class ColetorDados {
+public class DadosConsumo {
 
     private Timestamp dataHora;
     private String pontoColeta;
     private float valorKwh;
 
-    public ColetorDados() {
+    public DadosConsumo() {
 
     }
 

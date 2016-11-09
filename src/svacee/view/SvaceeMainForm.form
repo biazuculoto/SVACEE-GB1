@@ -11,6 +11,11 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f7" green="d4" red="6d" type="rgb"/>
         </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder/>
+          </Border>
+        </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f7" green="d4" red="6d" type="rgb"/>
         </Property>
@@ -35,7 +40,7 @@
                   <KeyStroke key="Ctrl+Alt+C"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/svacee/img/add_page (2).png"/>
+                  <Image iconType="3" name="/svacee/view/img/add_page (2).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Obter Dados CSV"/>
               </Properties>
@@ -49,7 +54,7 @@
                   <KeyStroke key="Ctrl+Alt+X"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/svacee/img/sair.png"/>
+                  <Image iconType="3" name="/svacee/view/img/sair.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
@@ -76,7 +81,7 @@
                   <KeyStroke key="Shift+Ctrl+T"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/svacee/img/tabela.png"/>
+                  <Image iconType="3" name="/svacee/view/img/tabela.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tabela de Dados"/>
               </Properties>
@@ -87,7 +92,7 @@
                   <KeyStroke key="Shift+Ctrl+G"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/svacee/img/chart (2).png"/>
+                  <Image iconType="3" name="/svacee/view/img/chart (2).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Gr&#xe1;fico de Consumo"/>
               </Properties>
@@ -111,7 +116,7 @@
                   <KeyStroke key="Shift+Ctrl+A"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/svacee/img/info (2).png"/>
+                  <Image iconType="3" name="/svacee/view/img/info (2).png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Sobre"/>
               </Properties>
@@ -175,7 +180,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/svacee/img/loss(1).png"/>
+          <Image iconType="3" name="/svacee/view/img/loss(1).png"/>
         </Property>
       </Properties>
     </Component>
@@ -192,7 +197,7 @@
         <Component class="javax.swing.JButton" name="bDado">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/svacee/img/add_page (2).png"/>
+              <Image iconType="3" name="/svacee/view/img/add_page (2).png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -213,7 +218,7 @@
         <Component class="javax.swing.JButton" name="bTabela">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/svacee/img/tabela.png"/>
+              <Image iconType="3" name="/svacee/view/img/tabela.png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -225,7 +230,7 @@
         <Component class="javax.swing.JButton" name="bGrafico">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/svacee/img/chart (2).png"/>
+              <Image iconType="3" name="/svacee/view/img/chart (2).png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -237,7 +242,7 @@
         <Component class="javax.swing.JButton" name="bSobre">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/svacee/img/info (2).png"/>
+              <Image iconType="3" name="/svacee/view/img/info (2).png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
@@ -249,7 +254,7 @@
         <Component class="javax.swing.JButton" name="bSair">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/svacee/img/sair.png"/>
+              <Image iconType="3" name="/svacee/view/img/sair.png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
