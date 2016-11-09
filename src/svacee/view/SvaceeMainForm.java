@@ -12,7 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
 import svacee.controller.DadosConsumoCtrl;
+import svacee.model.DadosConsumo;
 
 /**
  *
@@ -34,11 +36,42 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bTabela.setToolTipText("Obter dados a partir da tabela");
         bSobre.setToolTipText("Obter informações sobre o software");
         bSair.setToolTipText("Sair");
+        
 
         lcsv = new DadosConsumoCtrl();
 
     }
+    
+    public void run() {
 
+        try {
+
+            JFileChooser jfc = new JFileChooser();
+            int retorno = jfc.showOpenDialog(null);
+            if (retorno == JFileChooser.APPROVE_OPTION) {
+                File arq = jfc.getSelectedFile();
+
+                lcsv.obterCsv(arq);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
+    
+    public void exibirTabela(){
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.getDataVector().removeAllElements();
+        
+        for(DadosConsumo dc:lcsv.getDados()){
+            model.addRow(new Object[]{dc.getDataHora(),dc.getPontoColeta(),dc.getValorKwh()});             
+        } 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +94,8 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bSobre = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         bSair = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabela = new javax.swing.JTable();
         menu = new javax.swing.JMenuBar();
         mArquivo = new javax.swing.JMenu();
         smDado = new javax.swing.JMenuItem();
@@ -102,6 +137,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bTabela.setFocusable(false);
         bTabela.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bTabela.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bTabelaActionPerformed(evt);
+            }
+        });
         barraFerramenta.add(bTabela);
         barraFerramenta.add(jSeparator2);
 
@@ -129,6 +169,16 @@ public class SvaceeMainForm extends javax.swing.JFrame {
             }
         });
         barraFerramenta.add(bSair);
+
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data e Hora", "Ponto de Coleta", "Valor em KwH"
+            }
+        ));
+        jScrollPane1.setViewportView(tabela);
 
         menu.setBackground(new java.awt.Color(109, 212, 247));
         menu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -169,6 +219,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         smTabela.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         smTabela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/tabela.png"))); // NOI18N
         smTabela.setText("Tabela de Dados");
+        smTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smTabelaActionPerformed(evt);
+            }
+        });
         mVisualizar.add(smTabela);
 
         smGrafico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
@@ -200,6 +255,10 @@ public class SvaceeMainForm extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(82, 82, 82))
             .addComponent(barraFerramenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,7 +266,9 @@ public class SvaceeMainForm extends javax.swing.JFrame {
                 .addComponent(barraFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(45, 45, 45))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -227,13 +288,24 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
     private void bDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDadoActionPerformed
         // TODO add your handling code here:
-        //run();
+        run();
     }//GEN-LAST:event_bDadoActionPerformed
 
     private void smDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smDadoActionPerformed
         // TODO add your handling code here:
-        //run();
+        run();
     }//GEN-LAST:event_smDadoActionPerformed
+
+    private void bTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTabelaActionPerformed
+        // TODO add your handling code here:
+        exibirTabela();
+    }//GEN-LAST:event_bTabelaActionPerformed
+
+    private void smTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smTabelaActionPerformed
+        // TODO add your handling code here:
+        exibirTabela();
+        
+    }//GEN-LAST:event_smTabelaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +351,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JToolBar barraFerramenta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -292,5 +365,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem smSair;
     private javax.swing.JMenuItem smSobre;
     private javax.swing.JMenuItem smTabela;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

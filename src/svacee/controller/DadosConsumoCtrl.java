@@ -1,10 +1,13 @@
 package svacee.controller;
 
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import svacee.model.DadosConsumo;
 
 /**
@@ -14,11 +17,9 @@ import svacee.model.DadosConsumo;
  */
 public class DadosConsumoCtrl {
 
-    DadosConsumo dc = new DadosConsumo();
+    private DadosConsumo dc = new DadosConsumo();
     private File arq;
-    private String[] dados;
-    private String vetor1[]= new String[2];
-    private String vetor2[]= new String[2];
+    private List<DadosConsumo> dados = new ArrayList<>();
     
 
     public DadosConsumoCtrl() {
@@ -28,25 +29,33 @@ public class DadosConsumoCtrl {
     public void obterCsv(File arq) throws FileNotFoundException, IOException {
         setArq(arq);
         String linha = "";
-        
+        String[] linhas;
+        String[] colunas;
 
         BufferedReader br = null;
         FileReader fr = new FileReader(arq);
         
         br = new BufferedReader(fr);
         
+        DadosConsumo dc;
         
         while ((linha = br.readLine()) != null) {
 
-            dados = linha.split(",");
+            linhas = linha.split(",");
             
-            
-                                  
+            for(String v:linhas){
+                
+                colunas = v.split(";");
+                
+                dc = new DadosConsumo();
+                
+                dc.setDataHora(Timestamp.valueOf(colunas[0]));
+                dc.setPontoColeta(colunas[1]);
+                dc.setValorKwh(Float.parseFloat(colunas[2]));
+                
+                getDados().add(dc);
+            }                       
         }
-    }
-
-    public void exibirTabela() {
-
     }
 
     /**
@@ -64,46 +73,30 @@ public class DadosConsumoCtrl {
     }
 
     /**
-     * @return the matriz
+     * @return the dc
      */
-    
-
-    /**
-     * @return the vetor1
-     */
-    public String[] getVetor1() {
-        return vetor1;
-    }
-    public void setVetor1(String[] vetor1) {
-        this.vetor1 = vetor1;
+    public DadosConsumo getDc() {
+        return dc;
     }
 
     /**
-     * @return the vetor2
+     * @param dc the dc to set
      */
-    public String[] getVetor2() {
-        return vetor2;
-    }
-
-    /**
-     * @param vetor2 the vetor2 to set
-     */
-    public void setVetor2(String[] vetor2) {
-        this.vetor2 = vetor2;
+    public void setDc(DadosConsumo dc) {
+        this.dc = dc;
     }
 
     /**
      * @return the dados
      */
-    public String[] getDados() {
+    public List<DadosConsumo> getDados() {
         return dados;
     }
 
     /**
      * @param dados the dados to set
      */
-    public void setDados(String[] dados) {
+    public void setDados(List<DadosConsumo> dados) {
         this.dados = dados;
     }
-
 }

@@ -150,7 +150,7 @@ public class Teste1 extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.getDataVector().removeAllElements();
 
-        model.addRow(new Object[]{lcsv.getDados()});
+        //model.addRow(new Object[]{lcsv.getDados()});
     }//GEN-LAST:event_bTabelaActionPerformed
 
     /**
