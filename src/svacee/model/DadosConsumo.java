@@ -1,7 +1,6 @@
 package svacee.model;
 
 import java.sql.Timestamp;
-import javax.xml.crypto.Data;
 
 /**
  *

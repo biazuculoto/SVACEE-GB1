@@ -102,10 +102,14 @@ public class SvaceeTabela extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.getDataVector().removeAllElements();
-        
+        lcsv = new DadosConsumoCtrl();
+        dc = new DadosConsumo();
+       
         for(DadosConsumo dc:lcsv.getDados()){
             model.addRow(new Object[]{dc.getDataHora(),dc.getPontoColeta(),dc.getValorKwh()});             
-        }    
+        
+        }   
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

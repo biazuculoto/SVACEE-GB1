@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -83,7 +82,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         barraFerramenta = new javax.swing.JToolBar();
         bDado = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -94,8 +92,13 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bSobre = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         bSair = new javax.swing.JButton();
+        painelGuias = new javax.swing.JTabbedPane();
+        painelInicial = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        painelTabela = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        painelGrafico = new javax.swing.JPanel();
         menu = new javax.swing.JMenuBar();
         mArquivo = new javax.swing.JMenu();
         smDado = new javax.swing.JMenuItem();
@@ -111,10 +114,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu SVACEE");
         setBackground(java.awt.Color.white);
-
-        jLabel2.setBackground(java.awt.Color.white);
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/loss(1).png"))); // NOI18N
 
         barraFerramenta.setBackground(java.awt.Color.lightGray);
         barraFerramenta.setRollover(true);
@@ -149,6 +148,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bGrafico.setFocusable(false);
         bGrafico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bGrafico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGraficoActionPerformed(evt);
+            }
+        });
         barraFerramenta.add(bGrafico);
         barraFerramenta.add(jSeparator3);
 
@@ -170,15 +174,92 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         });
         barraFerramenta.add(bSair);
 
+        painelInicial.setBackground(java.awt.Color.white);
+        painelInicial.setForeground(java.awt.Color.white);
+
+        jLabel2.setBackground(java.awt.Color.white);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/loss(1).png"))); // NOI18N
+
+        javax.swing.GroupLayout painelInicialLayout = new javax.swing.GroupLayout(painelInicial);
+        painelInicial.setLayout(painelInicialLayout);
+        painelInicialLayout.setHorizontalGroup(
+            painelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelInicialLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(64, 64, 64))
+        );
+        painelInicialLayout.setVerticalGroup(
+            painelInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelInicialLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
+        );
+
+        painelGuias.addTab("Página Inicial", painelInicial);
+
+        painelTabela.setBackground(java.awt.Color.white);
+        painelTabela.setForeground(java.awt.Color.white);
+
+        tabela.setForeground(java.awt.Color.black);
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
                 "Data e Hora", "Ponto de Coleta", "Valor em KwH"
             }
         ));
         jScrollPane1.setViewportView(tabela);
+
+        javax.swing.GroupLayout painelTabelaLayout = new javax.swing.GroupLayout(painelTabela);
+        painelTabela.setLayout(painelTabelaLayout);
+        painelTabelaLayout.setHorizontalGroup(
+            painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelTabelaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        painelTabelaLayout.setVerticalGroup(
+            painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelTabelaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+
+        painelGuias.addTab("Tabela", painelTabela);
+
+        painelGrafico.setBackground(java.awt.Color.white);
+        painelGrafico.setForeground(java.awt.Color.white);
+
+        javax.swing.GroupLayout painelGraficoLayout = new javax.swing.GroupLayout(painelGrafico);
+        painelGrafico.setLayout(painelGraficoLayout);
+        painelGraficoLayout.setHorizontalGroup(
+            painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 453, Short.MAX_VALUE)
+        );
+        painelGraficoLayout.setVerticalGroup(
+            painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 298, Short.MAX_VALUE)
+        );
+
+        painelGuias.addTab("Gráfico", painelGrafico);
 
         menu.setBackground(new java.awt.Color(109, 212, 247));
         menu.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -229,6 +310,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         smGrafico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         smGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/chart (2).png"))); // NOI18N
         smGrafico.setText("Gráfico de Consumo");
+        smGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smGraficoActionPerformed(evt);
+            }
+        });
         mVisualizar.add(smGrafico);
 
         menu.add(mVisualizar);
@@ -250,25 +336,15 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(82, 82, 82))
             .addComponent(barraFerramenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(painelGuias, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(barraFerramenta, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(painelGuias, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -298,14 +374,26 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
     private void bTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTabelaActionPerformed
         // TODO add your handling code here:
+        painelGuias.setSelectedComponent(painelTabela);
         exibirTabela();
     }//GEN-LAST:event_bTabelaActionPerformed
 
     private void smTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smTabelaActionPerformed
         // TODO add your handling code here:
+        painelGuias.setSelectedComponent(painelTabela);
         exibirTabela();
         
     }//GEN-LAST:event_smTabelaActionPerformed
+
+    private void bGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGraficoActionPerformed
+        // TODO add your handling code here:
+        painelGuias.setSelectedComponent(painelGrafico);
+    }//GEN-LAST:event_bGraficoActionPerformed
+
+    private void smGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smGraficoActionPerformed
+        // TODO add your handling code here:
+        painelGuias.setSelectedComponent(painelGrafico);
+    }//GEN-LAST:event_smGraficoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,6 +448,10 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JMenu mArquivo;
     private javax.swing.JMenu mVisualizar;
     private javax.swing.JMenuBar menu;
+    private javax.swing.JPanel painelGrafico;
+    private javax.swing.JTabbedPane painelGuias;
+    private javax.swing.JPanel painelInicial;
+    private javax.swing.JPanel painelTabela;
     private javax.swing.JMenuItem smDado;
     private javax.swing.JMenuItem smGrafico;
     private javax.swing.JMenuItem smSair;
