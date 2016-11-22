@@ -35,16 +35,16 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bTabela.setToolTipText("Obter dados a partir da tabela");
         bSobre.setToolTipText("Obter informações sobre o software");
         bSair.setToolTipText("Sair");
-        
 
         lcsv = new DadosConsumoCtrl();
 
     }
-    
+
     public void run() {
 
         try {
-
+            lcsv.getDados().clear();
+            
             JFileChooser jfc = new JFileChooser();
             int retorno = jfc.showOpenDialog(null);
             if (retorno == JFileChooser.APPROVE_OPTION) {
@@ -62,15 +62,26 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
         }
     }
+
     
-    public void exibirTabela(){
+
+    public void exibirTabela() {
+        tabela.updateUI();
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.getDataVector().removeAllElements();
-        
-        for(DadosConsumo dc:lcsv.getDados()){
-            model.addRow(new Object[]{dc.getDataHora(),dc.getPontoColeta(),dc.getValorKwh()});             
-        } 
+
+        for (DadosConsumo dc : lcsv.getDados()) {
+            model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
+        }
     }
+    
+    //public void exibirgrafico(){
+    //   DefaultCategoryDataset  = new DefaultCategoryDataset();
+    //   for (DadosConsumo dc : lcsv.getDados()) {
+    //        model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
+    //    }
+        
+    //}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,6 +93,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         barraFerramenta = new javax.swing.JToolBar();
         bDado = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -99,6 +111,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         painelGrafico = new javax.swing.JPanel();
+        maquina = new javax.swing.JComboBox();
         menu = new javax.swing.JMenuBar();
         mArquivo = new javax.swing.JMenu();
         smDado = new javax.swing.JMenuItem();
@@ -230,17 +243,14 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         painelTabela.setLayout(painelTabelaLayout);
         painelTabelaLayout.setHorizontalGroup(
             painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelTabelaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
         painelTabelaLayout.setVerticalGroup(
             painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelTabelaLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Tabela", painelTabela);
@@ -252,11 +262,16 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         painelGrafico.setLayout(painelGraficoLayout);
         painelGraficoLayout.setHorizontalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 453, Short.MAX_VALUE)
+            .addGroup(painelGraficoLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(maquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(380, Short.MAX_VALUE))
         );
         painelGraficoLayout.setVerticalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 298, Short.MAX_VALUE)
+            .addGroup(painelGraficoLayout.createSequentialGroup()
+                .addComponent(maquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 271, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", painelGrafico);
@@ -382,7 +397,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         painelGuias.setSelectedComponent(painelTabela);
         exibirTabela();
-        
+
     }//GEN-LAST:event_smTabelaActionPerformed
 
     private void bGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGraficoActionPerformed
@@ -437,6 +452,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JButton bSobre;
     private javax.swing.JButton bTabela;
     private javax.swing.JToolBar barraFerramenta;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -447,6 +463,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JMenu mAjuda;
     private javax.swing.JMenu mArquivo;
     private javax.swing.JMenu mVisualizar;
+    private javax.swing.JComboBox maquina;
     private javax.swing.JMenuBar menu;
     private javax.swing.JPanel painelGrafico;
     private javax.swing.JTabbedPane painelGuias;
