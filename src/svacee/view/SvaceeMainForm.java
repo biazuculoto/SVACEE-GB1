@@ -75,13 +75,15 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         }
     }
     
-    //public void exibirgrafico(){
-    //   DefaultCategoryDataset  = new DefaultCategoryDataset();
-    //   for (DadosConsumo dc : lcsv.getDados()) {
-    //        model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
-    //    }
-        
-    //}
+//    public void exibirgrafico(){
+//       DefaultCategoryDataset  = new DefaultCategoryDataset();
+//       for (DadosConsumo dc : lcsv.getDados()) {
+//            model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
+//            
+//            
+//        }
+//        
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -263,15 +265,16 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         painelGraficoLayout.setHorizontalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelGraficoLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(maquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(380, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(maquina, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         painelGraficoLayout.setVerticalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelGraficoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(maquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 271, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", painelGrafico);
