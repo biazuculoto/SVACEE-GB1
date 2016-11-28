@@ -6,10 +6,13 @@
 package svacee.view;
 
 import java.awt.Color;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import svacee.controller.DadosConsumoCtrl;
@@ -36,14 +39,14 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bSobre.setToolTipText("Obter informações sobre o software");
         bSair.setToolTipText("Sair");
 
-        lcsv = new DadosConsumoCtrl();
-
+        lcsv = new DadosConsumoCtrl();              
     }
 
     public void run() {
 
         try {
             lcsv.getDados().clear();
+            lcsv.getListaPontosColeta().clear();
             
             JFileChooser jfc = new JFileChooser();
             int retorno = jfc.showOpenDialog(null);
@@ -72,6 +75,15 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
         for (DadosConsumo dc : lcsv.getDados()) {
             model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
+        }
+    }
+    
+    public void preencheCbPontoColeta(){
+        cbPontoColeta.removeAllItems();
+        
+        Iterator i = lcsv.getListaPontosColeta().iterator();
+        while (i.hasNext()) {                        
+            cbPontoColeta.addItem((String) i.next());
         }
     }
     
@@ -113,7 +125,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         painelGrafico = new javax.swing.JPanel();
-        maquina = new javax.swing.JComboBox();
+        cbPontoColeta = new javax.swing.JComboBox();
         menu = new javax.swing.JMenuBar();
         mArquivo = new javax.swing.JMenu();
         smDado = new javax.swing.JMenuItem();
@@ -260,21 +272,28 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         painelGrafico.setBackground(java.awt.Color.white);
         painelGrafico.setForeground(java.awt.Color.white);
 
+        cbPontoColeta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione..." }));
+        cbPontoColeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPontoColetaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelGraficoLayout = new javax.swing.GroupLayout(painelGrafico);
         painelGrafico.setLayout(painelGraficoLayout);
         painelGraficoLayout.setHorizontalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelGraficoLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(maquina, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGraficoLayout.createSequentialGroup()
+                .addContainerGap(265, Short.MAX_VALUE)
+                .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         painelGraficoLayout.setVerticalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelGraficoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(maquina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", painelGrafico);
@@ -406,12 +425,23 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private void bGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGraficoActionPerformed
         // TODO add your handling code here:
         painelGuias.setSelectedComponent(painelGrafico);
+        lcsv.obterPontosColeta();
+        preencheCbPontoColeta();
     }//GEN-LAST:event_bGraficoActionPerformed
 
     private void smGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smGraficoActionPerformed
         // TODO add your handling code here:
         painelGuias.setSelectedComponent(painelGrafico);
+        lcsv.obterPontosColeta();
+        preencheCbPontoColeta();
     }//GEN-LAST:event_smGraficoActionPerformed
+
+    private void cbPontoColetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPontoColetaActionPerformed
+        // TODO add your handling code here:
+        String item = (String) cbPontoColeta.getSelectedItem();
+        System.out.println(item);
+        lcsv.dataSet(item);
+    }//GEN-LAST:event_cbPontoColetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,6 +486,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JButton bTabela;
     private javax.swing.JToolBar barraFerramenta;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox cbPontoColeta;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -466,7 +497,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JMenu mAjuda;
     private javax.swing.JMenu mArquivo;
     private javax.swing.JMenu mVisualizar;
-    private javax.swing.JComboBox maquina;
     private javax.swing.JMenuBar menu;
     private javax.swing.JPanel painelGrafico;
     private javax.swing.JTabbedPane painelGuias;

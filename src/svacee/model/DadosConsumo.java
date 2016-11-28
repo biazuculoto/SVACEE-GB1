@@ -58,4 +58,8 @@ public class DadosConsumo {
         this.valorKwh = valorKwh;
     }
 
+    public DadosConsumo setDataHora(String hora) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
