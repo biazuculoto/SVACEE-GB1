@@ -69,7 +69,7 @@ public class DadosConsumoCtrl {
             if (!listaPontosColeta.contains(dc.getPontoColeta())) {
                 listaPontosColeta.add(dc.getPontoColeta());
             } else {
-                System.out.println("Ponto já existe");
+                //System.out.println("Ponto já existe");
             }
         }
 
@@ -82,6 +82,15 @@ public class DadosConsumoCtrl {
     public void dataSet(String item) {
         for (DadosConsumo dc : getDados()) {
             if (dc.getPontoColeta().equalsIgnoreCase(item)) {
+                dc.getDataHora();
+                dc.getValorKwh();
+
+                dataSet.add(dc);
+
+                //Iterator i = dataSet.iterator();
+                //while (i.hasNext()) {
+                //    System.out.println(dataSet);
+                //}
                 //Aqui tem que criar uma lista com os valores referentes ao
                 //ponto de coleta selecionado
             }

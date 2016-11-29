@@ -77,6 +77,15 @@ public class SvaceeMainForm extends javax.swing.JFrame {
             model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
         }
     }
+    public void exibirTabela2() {
+        tabela2.updateUI();
+        DefaultTableModel model = (DefaultTableModel) tabela2.getModel();
+        model.getDataVector().removeAllElements();
+
+        for (DadosConsumo dc : lcsv.getDataSet()) {
+            model.addRow(new Object[]{dc.getDataHora(), dc.getValorKwh()});
+        }
+    }
     
     public void preencheCbPontoColeta(){
         cbPontoColeta.removeAllItems();
@@ -126,6 +135,8 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         painelGrafico = new javax.swing.JPanel();
         cbPontoColeta = new javax.swing.JComboBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabela2 = new javax.swing.JTable();
         menu = new javax.swing.JMenuBar();
         mArquivo = new javax.swing.JMenu();
         smDado = new javax.swing.JMenuItem();
@@ -252,6 +263,10 @@ public class SvaceeMainForm extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(1).setResizable(false);
+            tabela.getColumnModel().getColumn(1).setHeaderValue("Ponto de Coleta");
+        }
 
         javax.swing.GroupLayout painelTabelaLayout = new javax.swing.GroupLayout(painelTabela);
         painelTabela.setLayout(painelTabelaLayout);
@@ -279,13 +294,40 @@ public class SvaceeMainForm extends javax.swing.JFrame {
             }
         });
 
+        tabela2.setForeground(java.awt.Color.black);
+        tabela2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Data e Hora", "Valor em KwH"
+            }
+        ));
+        jScrollPane2.setViewportView(tabela2);
+
         javax.swing.GroupLayout painelGraficoLayout = new javax.swing.GroupLayout(painelGrafico);
         painelGrafico.setLayout(painelGraficoLayout);
         painelGraficoLayout.setHorizontalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGraficoLayout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
-                .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(painelGraficoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGraficoLayout.createSequentialGroup()
+                        .addGap(0, 253, Short.MAX_VALUE)
+                        .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
                 .addContainerGap())
         );
         painelGraficoLayout.setVerticalGroup(
@@ -293,7 +335,9 @@ public class SvaceeMainForm extends javax.swing.JFrame {
             .addGroup(painelGraficoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", painelGrafico);
@@ -438,9 +482,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
     private void cbPontoColetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPontoColetaActionPerformed
         // TODO add your handling code here:
+        lcsv.getDataSet().clear();
         String item = (String) cbPontoColeta.getSelectedItem();
-        System.out.println(item);
+        //System.out.println(item);
         lcsv.dataSet(item);
+        exibirTabela2();
     }//GEN-LAST:event_cbPontoColetaActionPerformed
 
     /**
@@ -490,6 +536,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -508,5 +555,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem smSobre;
     private javax.swing.JMenuItem smTabela;
     private javax.swing.JTable tabela;
+    private javax.swing.JTable tabela2;
     // End of variables declaration//GEN-END:variables
 }
