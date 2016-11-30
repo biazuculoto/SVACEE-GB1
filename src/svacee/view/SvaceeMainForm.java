@@ -6,15 +6,23 @@
 package svacee.view;
 
 import java.awt.Color;
-import java.awt.event.ItemListener;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import svacee.controller.DadosConsumoCtrl;
 import svacee.model.DadosConsumo;
 
@@ -25,6 +33,7 @@ import svacee.model.DadosConsumo;
 public class SvaceeMainForm extends javax.swing.JFrame {
 
     DadosConsumoCtrl lcsv;
+    String item;
 
     /**
      * Creates new form SvaceeMainForm
@@ -66,8 +75,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         }
     }
 
-    
-
     public void exibirTabela() {
         tabela.updateUI();
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
@@ -75,15 +82,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
         for (DadosConsumo dc : lcsv.getDados()) {
             model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
-        }
-    }
-    public void exibirTabela2() {
-        tabela2.updateUI();
-        DefaultTableModel model = (DefaultTableModel) tabela2.getModel();
-        model.getDataVector().removeAllElements();
-
-        for (DadosConsumo dc : lcsv.getDataSet()) {
-            model.addRow(new Object[]{dc.getDataHora(), dc.getValorKwh()});
         }
     }
     
@@ -96,15 +94,54 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         }
     }
     
-//    public void exibirgrafico(){
-//       DefaultCategoryDataset  = new DefaultCategoryDataset();
-//       for (DadosConsumo dc : lcsv.getDados()) {
-//            model.addRow(new Object[]{dc.getDataHora(), dc.getPontoColeta(), dc.getValorKwh()});
-//            
-//            
-//        }
-//        
-//    }
+    public void geraGrafico() {
+        if(lcsv.getVerificaArquivo()==2){
+        if (painelGuias.getTabCount() == 4) {
+            painelGuias.remove(3);
+        }
+
+        JPanel chartPanel = createChartPanel();
+        painelGuias.add(chartPanel, "Visualização Gráfico");
+        painelGuias.setSelectedComponent(chartPanel);
+        } else{
+            JOptionPane.showMessageDialog(null, "Não é possível visualizar o gráfico!"
+                    + "\nNenhum arquivo CSV foi selecionado", "ERRO", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }
+
+    private JPanel createChartPanel() {
+        String chartTitle = "Gráfico de consumo:" + item;
+        String xAxisLabel = "Hora (Hora.minuto)";
+        String yAxisLabel = "Valor KwH";
+
+        XYDataset dataset = createDataset();
+
+        JFreeChart chart = ChartFactory.createXYLineChart(chartTitle,
+                xAxisLabel, yAxisLabel, dataset);
+
+        XYPlot plot = chart.getXYPlot();
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        plot.setRenderer(renderer);
+
+        return new ChartPanel(chart);
+    }
+
+    private XYDataset createDataset() {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries linha = new XYSeries(item);
+
+        
+        SimpleDateFormat hora = new SimpleDateFormat("HH.mm");
+        
+
+        for (DadosConsumo dc : lcsv.getDataSet()) {
+            linha.add(Double.parseDouble(hora.format(dc.getDataHora())), dc.getValorKwh());            
+        }
+        dataset.addSeries(linha);
+
+        return dataset;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -135,8 +172,9 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         tabela = new javax.swing.JTable();
         painelGrafico = new javax.swing.JPanel();
         cbPontoColeta = new javax.swing.JComboBox();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabela2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         menu = new javax.swing.JMenuBar();
         mArquivo = new javax.swing.JMenu();
         smDado = new javax.swing.JMenuItem();
@@ -211,6 +249,8 @@ public class SvaceeMainForm extends javax.swing.JFrame {
             }
         });
         barraFerramenta.add(bSair);
+
+        painelGuias.setFont(new java.awt.Font("Droid Serif", 0, 15)); // NOI18N
 
         painelInicial.setBackground(java.awt.Color.white);
         painelInicial.setForeground(java.awt.Color.white);
@@ -294,50 +334,50 @@ public class SvaceeMainForm extends javax.swing.JFrame {
             }
         });
 
-        tabela2.setForeground(java.awt.Color.black);
-        tabela2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Data e Hora", "Valor em KwH"
+        jLabel1.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+        jLabel1.setText("Escolha um ponto de coleta:");
+
+        jButton1.setFont(new java.awt.Font("Droid Serif", 0, 18)); // NOI18N
+        jButton1.setText("Visualizar Gráfico");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
-        ));
-        jScrollPane2.setViewportView(tabela2);
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/loss.png"))); // NOI18N
 
         javax.swing.GroupLayout painelGraficoLayout = new javax.swing.GroupLayout(painelGrafico);
         painelGrafico.setLayout(painelGraficoLayout);
         painelGraficoLayout.setHorizontalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelGraficoLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelGraficoLayout.createSequentialGroup()
-                        .addGap(0, 253, Short.MAX_VALUE)
-                        .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(painelGraficoLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel1))
+                    .addGroup(painelGraficoLayout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addGroup(painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addGroup(painelGraficoLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(39, 39, 39)))))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         painelGraficoLayout.setVerticalGroup(
             painelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelGraficoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(cbPontoColeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         painelGuias.addTab("Gráfico", painelGrafico);
@@ -440,7 +480,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private void smSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
-
     }//GEN-LAST:event_smSairActionPerformed
 
     private void bDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDadoActionPerformed
@@ -463,7 +502,6 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         painelGuias.setSelectedComponent(painelTabela);
         exibirTabela();
-
     }//GEN-LAST:event_smTabelaActionPerformed
 
     private void bGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGraficoActionPerformed
@@ -483,11 +521,14 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private void cbPontoColetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPontoColetaActionPerformed
         // TODO add your handling code here:
         lcsv.getDataSet().clear();
-        String item = (String) cbPontoColeta.getSelectedItem();
-        //System.out.println(item);
-        lcsv.dataSet(item);
-        exibirTabela2();
+        item = (String) cbPontoColeta.getSelectedItem();
+        lcsv.dataSet(item);        
     }//GEN-LAST:event_cbPontoColetaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        geraGrafico();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -533,10 +574,12 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JToolBar barraFerramenta;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cbPontoColeta;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -555,6 +598,5 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem smSobre;
     private javax.swing.JMenuItem smTabela;
     private javax.swing.JTable tabela;
-    private javax.swing.JTable tabela2;
     // End of variables declaration//GEN-END:variables
 }
