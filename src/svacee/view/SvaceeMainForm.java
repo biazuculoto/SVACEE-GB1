@@ -154,6 +154,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jDialog1 = new javax.swing.JDialog();
         barraFerramenta = new javax.swing.JToolBar();
         bDado = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -186,6 +187,17 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         smSobre = new javax.swing.JMenuItem();
 
         jPanel1.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu SVACEE");
@@ -236,6 +248,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         bSobre.setFocusable(false);
         bSobre.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bSobre.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSobreActionPerformed(evt);
+            }
+        });
         barraFerramenta.add(bSobre);
         barraFerramenta.add(jSeparator4);
 
@@ -447,6 +464,11 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         smSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         smSobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/info (2).png"))); // NOI18N
         smSobre.setText("Sobre");
+        smSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smSobreActionPerformed(evt);
+            }
+        });
         mAjuda.add(smSobre);
 
         menu.add(mAjuda);
@@ -530,6 +552,16 @@ public class SvaceeMainForm extends javax.swing.JFrame {
         geraGrafico();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void bSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSobreActionPerformed
+        // TODO add your handling code here:
+        new SvaceeSobre().setVisible(true);
+    }//GEN-LAST:event_bSobreActionPerformed
+
+    private void smSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smSobreActionPerformed
+        // TODO add your handling code here:
+        new SvaceeSobre().setVisible(true);
+    }//GEN-LAST:event_smSobreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -575,6 +607,7 @@ public class SvaceeMainForm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cbPontoColeta;
     private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
