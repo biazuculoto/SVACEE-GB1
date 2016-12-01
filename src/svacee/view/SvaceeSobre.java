@@ -33,14 +33,16 @@ public class SvaceeSobre extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(java.awt.Color.white);
 
+        jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Droid Serif", 0, 15)); // NOI18N
         jTextArea2.setRows(5);
         jTextArea2.setText("Nosso software foi criado \ncom objetivo principal de  facilitar \no dia a dia de uma empresa, \nauxiliando na tomada  de decisões \nno quesito economia de energia, \ne facilitando  a identificação de \nferramentas que consumem um\nvalor  de Kw/h muito elevado, \ncriando um gráfico e tabela com \ninformações detalhadas de consumo\nde cada equipamento  melhorando \na rentabilidade da empresa, \ntrazendo maiores  lucros.");
+        jTextArea2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane2.setViewportView(jTextArea2);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/svacee/view/img/loss(1).png"))); // NOI18N
@@ -60,7 +62,7 @@ public class SvaceeSobre extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
