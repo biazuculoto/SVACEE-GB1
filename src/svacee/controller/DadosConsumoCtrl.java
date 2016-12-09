@@ -43,11 +43,11 @@ public class DadosConsumoCtrl {
 
         while ((linha = br.readLine()) != null) {
 
-            linhas = linha.split(",");
+            linhas = linha.split(";");
 
             for (String v : linhas) {
 
-                colunas = v.split(";");
+                colunas = v.split(",");
 
                 dc = new DadosConsumo();
 
